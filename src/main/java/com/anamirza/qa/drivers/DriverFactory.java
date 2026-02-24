@@ -7,8 +7,10 @@ import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.edge.EdgeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
 
+
 public class DriverFactory {
     private static ThreadLocal<WebDriver> driver = new ThreadLocal<>();
+
     public static void initDriver() {
 
         String browser = ConfigReader.getBrowser();
