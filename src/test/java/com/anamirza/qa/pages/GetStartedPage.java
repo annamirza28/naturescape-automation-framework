@@ -229,7 +229,8 @@ public class GetStartedPage {
     }
     /** Enters notes text. */
     public void enterNotes(String notes) {
-        WaitUtil.waitForVisibility(notesTextArea).sendKeys(notes);
+        WaitUtil.waitForVisibility(notesHeading);  // wait for section first
+        WaitUtil.waitForClickable(notesTextArea).sendKeys(notes);
     }
     // ========== Combined Flow Actions ==========
     /**
@@ -271,13 +272,6 @@ public class GetStartedPage {
     }
     // ========== Scroll Actions ==========
     /**
-     * Scrolls to the bottom of the page.
-     * Useful when form expands and new sections appear below.
-     */
-    public void scrollToSubmitButton() {
-        JavaScriptUtil.scrollToBottom();
-    }
-    /**
      * Scrolls to the Price Estimator section.
      */
     public void scrollToPriceEstimator() {
@@ -302,7 +296,9 @@ public class GetStartedPage {
      * Scrolls to the Notes section.
      */
     public void scrollToNotes() {
+        WaitUtil.waitForVisibility(notesHeading);
         JavaScriptUtil.scrollToElement(WaitUtil.waitForVisibility(notesHeading));
+        WaitUtil.waitForVisibility(notesTextArea); // extra wait for textarea
     }
     /**
      * Scrolls to the Payment Information section.
