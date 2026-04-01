@@ -9,6 +9,9 @@
 ![Tests](https://img.shields.io/badge/Tests-184%20Passing-brightgreen)
 ![License](https://img.shields.io/badge/License-MIT-blue)
 
+## Test Results
+
+![184 Tests Passing](docs/images/UI_Automation_framework.png)
 ---
 
 ## 📋 Table of Contents
