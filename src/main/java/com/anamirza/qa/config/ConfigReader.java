@@ -1,46 +1,49 @@
 package com.anamirza.qa.config;
 
-import java.io.FileInputStream;
 import java.io.IOException;
+import java.io.InputStream;
 import java.util.Properties;
 
 /**
- * Reads data from config.properties file
- * (browser, url, timeout, etc.)
+ * Reads configuration data from config.properties file.
+ * Uses classpath loading — works locally and in CI/CD.
  */
-
 public class ConfigReader {
-    private static Properties properties;
+    private static final Properties properties = new Properties();
 
-    // Load config file only once
+    // Load config file only once when class is first used
     static {
-        try {
-            FileInputStream file = new FileInputStream(
-                    "src/test/resources/config.properties"
-            );
+        try (InputStream input = ConfigReader.class
+                .getClassLoader()
+                .getResourceAsStream("config.properties")) {
 
-            properties = new Properties();
-            properties.load(file);
+            if (input == null) {
+                throw new RuntimeException(
+                        "config.properties not found in src/test/resources/");
+            }
+            properties.load(input);
 
         } catch (IOException e) {
-            e.printStackTrace();
-            throw new RuntimeException("Failed to load config.properties");
+            throw new RuntimeException(
+                    "Failed to load config.properties", e);
         }
     }
-    // Get browser name
+    // Private constructor — no one should instantiate this class
+    private ConfigReader() {}
+
+    // Get browser name (chrome / firefox / edge)
     public static String getBrowser() {
         return properties.getProperty("browser");
     }
 
-    // Get application URL
+    // Get application base URL
     public static String getUrl() {
         return properties.getProperty("url");
     }
 
-    // Get timeout
+    // Get explicit wait timeout in seconds
     public static int getTimeout() {
         return Integer.parseInt(
-                properties.getProperty("timeout")
-        );
+                properties.getProperty("timeout"));
     }
 }

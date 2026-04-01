@@ -1,50 +1,99 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project xmlns="http://maven.apache.org/POM/4.0.0"
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0
+         http://maven.apache.org/xsd/maven-4.0.0.xsd">
+
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>com.anamirza.qa</groupId>
     <artifactId>naturescape-automation-framework</artifactId>
     <version>1.0-SNAPSHOT</version>
+    <packaging>jar</packaging>
 
+    <name>Naturescape Lawn Care Automation Framework</name>
+    <description>
+        UI Automation Framework for https://naturescapelawncare.com/
+        using Selenium WebDriver, TestNG, and ExtentReports
+    </description>
+
+    <!-- ===================== VERSIONS ===================== -->
+    <!-- Change versions here only — no need to hunt through file -->
     <properties>
         <maven.compiler.source>22</maven.compiler.source>
         <maven.compiler.target>22</maven.compiler.target>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+
+        <!-- Dependency versions -->
+        <selenium.version>4.17.0</selenium.version>
+        <testng.version>7.9.0</testng.version>
+        <webdrivermanager.version>5.9.2</webdrivermanager.version>
+        <extentreports.version>5.1.1</extentreports.version>
+        <commons-io.version>2.15.1</commons-io.version>
+        <surefire.version>3.2.5</surefire.version>
     </properties>
+
+    <!-- ===================== DEPENDENCIES ===================== -->
     <dependencies>
 
-        <!-- Selenium -->
+        <!-- Selenium WebDriver — browser automation -->
         <dependency>
             <groupId>org.seleniumhq.selenium</groupId>
             <artifactId>selenium-java</artifactId>
-            <version>4.17.0</version>
+            <version>${selenium.version}</version>
         </dependency>
 
-        <!-- TestNG -->
+        <!-- TestNG — test framework -->
         <dependency>
             <groupId>org.testng</groupId>
             <artifactId>testng</artifactId>
-            <version>7.9.0</version>
+            <version>${testng.version}</version>
             <scope>test</scope>
         </dependency>
 
-        <!-- WebDriverManager -->
+        <!-- WebDriverManager — auto downloads browser drivers -->
         <dependency>
             <groupId>io.github.bonigarcia</groupId>
             <artifactId>webdrivermanager</artifactId>
-            <version>5.6.3</version>
+            <version>${webdrivermanager.version}</version>
         </dependency>
 
+        <!-- ExtentReports — HTML test reports -->
         <dependency>
             <groupId>com.aventstack</groupId>
             <artifactId>extentreports</artifactId>
-            <version>5.1.1</version>
+            <version>${extentreports.version}</version>
         </dependency>
 
+        <!-- Commons IO — used by ScreenshotUtil for file copying -->
+        <dependency>
+            <groupId>commons-io</groupId>
+            <artifactId>commons-io</artifactId>
+            <version>${commons-io.version}</version>
+        </dependency>
 
     </dependencies>
 
+    <!-- ===================== BUILD ===================== -->
+    <build>
+        <plugins>
+
+            <!-- Surefire — runs TestNG tests via mvn test -->
+            <!-- Points Maven to our testng.xml suite file -->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-surefire-plugin</artifactId>
+                <version>${surefire.version}</version>
+                <configuration>
+                    <suiteXmlFiles>
+                        <suiteXmlFile>
+                            src/test/resources/testng.xml
+                        </suiteXmlFile>
+                    </suiteXmlFiles>
+                </configuration>
+            </plugin>
+
+        </plugins>
+    </build>
 
 </project>

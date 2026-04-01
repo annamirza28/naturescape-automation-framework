@@ -2,6 +2,7 @@ package com.anamirza.qa.utils;
 
 import com.anamirza.qa.drivers.DriverFactory;
 import org.openqa.selenium.JavascriptExecutor;
+import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
 /**
@@ -11,8 +12,14 @@ import org.openqa.selenium.WebElement;
 public class JavaScriptUtil {
     // Get JS executor
     private static JavascriptExecutor getJs() {
-        return (JavascriptExecutor) DriverFactory.getDriver();
+        WebDriver driver = DriverFactory.getDriver();
+        if (driver == null) {
+            throw new IllegalStateException(
+                    "WebDriver is not initialized. Call DriverFactory.initDriver() first.");
+        }
+        return (JavascriptExecutor) driver;
     }
+    private JavaScriptUtil() {}
 
     // Click using JavaScript
     public static void click(WebElement element) {

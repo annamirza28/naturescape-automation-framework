@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd">
+
+<suite name="Naturescape Automation Suite" verbose="1">
+
+    <!-- Registers ExtentReportListener for HTML reporting -->
+    <listeners>
+        <listener class-name=
+                          "com.anamirza.qa.listeners.ExtentReportListener"/>
+    </listeners>
+
+    <test name="Naturescape UI Tests">
+        <classes>
+            <class name="com.anamirza.qa.tests.HomePageTests"/>
+            <class name="com.anamirza.qa.tests.AboutPageTests"/>
+            <class name="com.anamirza.qa.tests.ContactUsPageTests"/>
+            <class name="com.anamirza.qa.tests.CustomerServiceResponsePageTests"/>
+            <class name="com.anamirza.qa.tests.JobListingsAtNaturescapePageTests"/>
+            <class name="com.anamirza.qa.tests.NaturescapeLocationsPageTests"/>
+            <class name="com.anamirza.qa.tests.ServicesPageTests"/>
+            <class name="com.anamirza.qa.tests.GetStartedPageTests"/>
+            <class name="com.anamirza.qa.tests.LawnTipsPageTests"/>
+            <class name="com.anamirza.qa.tests.MakeSelfStoragePaymentPageTests"/>
+            <class name="com.anamirza.qa.tests.MyAccountPageTests"/>
+            <class name="com.anamirza.qa.tests.PaymentPageTests"/>
+            <class name="com.anamirza.qa.tests.TermsAndConditionsPageTests"/>
+            <class name="com.anamirza.qa.tests.TermsAndPrivacyPageTests"/>
+
+        </classes>
+    </test>
+
+</suite>
