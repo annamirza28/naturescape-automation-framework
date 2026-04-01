@@ -72,6 +72,13 @@ public class DriverFactory {
         options.addArguments("--no-default-browser-check");
         options.addArguments("--disable-extensions");
         options.addArguments("--incognito");
+        // Run headless in CI environments (GitHub Actions = no display)
+        if (Boolean.parseBoolean(System.getenv().getOrDefault("CI", "false"))) {
+            options.addArguments("--headless");
+            options.addArguments("--disable-gpu");
+            options.addArguments("--window-size=1920,1080");
+        }
+
         return options;
     }
 
