@@ -211,27 +211,35 @@ mvn clean install -DskipTests
 
 ## Running Tests
 
-### Run the full suite via Maven:
-
+### Run full suite (default Chrome, production)
 ```bash
 mvn test
 ```
 
-### Run via TestNG XML directly (IntelliJ):
+### Run with specific browser
+```bash
+mvn test -Dbrowser=chrome
+mvn test -Dbrowser=firefox
+mvn test -Dbrowser=edge
+```
 
-Right-click `testng.xml` → **Run**
+### Run against staging environment
+```bash
+mvn test -Dbrowser=chrome -Denv=staging
+```
 
-### Run a specific test class:
-
+### Run a specific test class
 ```bash
 mvn test -Dtest=HomePageTests
 ```
 
-### Run with a specific browser (if configured):
-
+### Run a specific test method
 ```bash
-mvn test -Dbrowser=firefox
+mvn test -Dtest=HomePageTests#shouldDisplayCorrectPageHeading
 ```
+
+### Run via TestNG XML directly (IntelliJ)
+Right-click `testng.xml` → **Run**
 
 ---
 

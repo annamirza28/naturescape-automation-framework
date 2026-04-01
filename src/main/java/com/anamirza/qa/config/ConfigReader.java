@@ -33,12 +33,20 @@ public class ConfigReader {
 
     // Get browser name (chrome / firefox / edge)
     public static String getBrowser() {
-        return properties.getProperty("browser");
+        // -Dbrowser=firefox on command line overrides config.properties
+        return System.getProperty("browser",
+                properties.getProperty("browser"));
     }
 
     // Get application base URL
     public static String getUrl() {
-        return properties.getProperty("url");
+        // -Denv=staging on command line overrides config.properties
+        String env = System.getProperty("env", "prod");
+        if (env.equalsIgnoreCase("staging")) {
+            return "https://staging.naturescapelawncare.com";
+        }
+        return System.getProperty("url",
+                properties.getProperty("url"));
     }
 
     // Get explicit wait timeout in seconds
